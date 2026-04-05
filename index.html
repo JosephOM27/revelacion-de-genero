@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Revelación de Género · Issey & Erick</title>
+    <!-- Google Fonts & Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 10% 30%, #ffe6f0, #ffffff, #e0f0ff);
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fondo animado con burbujas / estrellas dinámicas (JS) */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star, .confetti {
+            position: absolute;
+            background-color: currentColor;
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none;
+            animation: floatAround 12s infinite ease-in-out;
+        }
+
+        @keyframes floatAround {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
+            50% { transform: translateY(-25px) rotate(8deg); opacity: 0.7; }
+            100% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
+        }
+
+        /* Tarjeta principal */
+        .invitation-card {
+            position: relative;
+            z-index: 10;
+            max-width: 520px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(14px);
+            border-radius: 48px 32px 56px 32px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,240,0.6) inset;
+            padding: 2rem 1.8rem 2.4rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            animation: cardGlide 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes cardGlide {
+            0% { opacity: 0; transform: scale(0.96) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Decoración bicolor (rosa + azul) en bordes sutiles */
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(115deg, #f9a8d4, #a3cfff, #f9a8d4);
+            border-radius: 52px 36px 60px 36px;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(8px);
+        }
+
+        .card-inner {
+            position: relative;
+        }
+
+        /* Encabezado con nombres y frase */
+        .intro-text {
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            color: #5f6c7a;
+            font-weight: 500;
+            background: rgba(255,245,240,0.5);
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+            margin-bottom: 1rem;
+        }
+
+        .parents-names {
+            font-weight: 700;
+            color: #b4875a;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin: 0 0.2rem;
+        }
+
+        .title-gender {
+            margin: 0.5rem 0 0.2rem;
+        }
+
+        .gender-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            background: linear-gradient(135deg, #e26d9e, #6ba6e2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.05);
+            animation: gentleFloat 3.5s infinite ease;
+            margin-bottom: 0.25rem;
+        }
+
+        @keyframes gentleFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .sub-reveal {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #b68b70;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: #fff0e7;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+        }
+
+        /* Detalles de fecha y hora - nuevo diseño cohesivo */
+        .event-details {
+            background: rgba(255, 248, 245, 0.7);
+            border-radius: 42px;
+            padding: 1.2rem 1rem;
+            margin: 1.8rem 0;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,210,0.8);
+        }
+
+        .date-badge {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.4rem 1rem;
+            font-weight: 600;
+            color: #3a4a5e;
+            margin-bottom: 0.6rem;
+        }
+
+        .date-badge i {
+            color: #c28a5c;
+            font-size: 1.1rem;
+            margin-right: 6px;
+        }
+
+        .full-date {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #a07754, #c5956b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .time-block {
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: #fdeee6;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            margin-top: 0.2rem;
+        }
+
+        .time-block i {
+            margin-right: 8px;
+            color: #d98e5a;
+        }
+
+        /* ubicación elegante */
+        .location-box {
+            background: #ffffffcc;
+            border-radius: 28px;
+            padding: 0.8rem 1rem;
+            margin: 1rem 0 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.03);
+        }
+
+        .location-icon {
+            font-size: 1.8rem;
+            color: #e2a175;
+        }
+
+        .venue {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #4d3e33;
+        }
+
+        .venue span {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #7c6b5c;
+            display: block;
+        }
+
+        /* Botones mejorados con íconos y efectos */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 1.6rem 0 1rem;
+        }
+
+        .btn-action {
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: 1.5px solid transparent;
+            background: rgba(255, 245, 235, 0.8);
+            color: #5e4b3a;
+            border-color: #e7cfbf;
+            backdrop-filter: blur(2px);
+        }
+
+        .btn-action i {
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-action:hover {
+            background: linear-gradient(95deg, #fff3ea, #ffe7db);
+            border-color: #c2a083;
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .btn-action:hover i {
+            transform: translateX(3px);
+        }
+
+        .btn-map:hover i {
+            transform: translateX(2px) scale(1.1);
+        }
+
+        .btn-confirm {
+            background: #fff2ea;
+            border-color: #f3cfbb;
+        }
+
+        /* frase final con estilo cursivo */
+        .footer-message {
+            margin-top: 1.8rem;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #b8865b;
+            text-shadow: 1px 1px 2px rgba(255,235,210,0.8);
+            position: relative;
+            display: inline-block;
+            width: auto;
+            padding: 0 0.5rem;
+        }
+
+        .small-note {
+            font-size: 0.7rem;
+            font-family: 'Montserrat', sans-serif;
+            color: #b09682;
+            margin-top: 1rem;
+            letter-spacing: 0.3px;
+            border-top: 1px dashed #eedbcb;
+            padding-top: 1rem;
+            display: inline-block;
+        }
+
+        /* símbolos decorativos género */
+        .gender-symbols {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 0.5rem 0 0.2rem;
+            opacity: 0.7;
+        }
+
+        .symbol {
+            font-size: 1.4rem;
+            background: #f5e3d8;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100px;
+            backdrop-filter: blur(2px);
+            transition: all 0.2s;
+        }
+
+        .symbol-pink {
+            color: #e88bb4;
+            background: #ffeef4;
+            box-shadow: 0 2px 6px rgba(232, 139, 180, 0.2);
+        }
+
+        .symbol-blue {
+            color: #6cace4;
+            background: #eef5ff;
+        }
+
+        .question-mark {
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: #faeedf;
+            color: #b6885e;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .invitation-card {
+                padding: 1.5rem 1.2rem 2rem;
+            }
+            .gender-title {
+                font-size: 2.8rem;
+            }
+            .full-date {
+                font-size: 1.2rem;
+            }
+            .footer-message {
+                font-size: 1.8rem;
+            }
+            .btn-action {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+            .date-badge {
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="floating-elements" id="floatingDecor"></div>
+
+<div class="invitation-card">
+    <div class="card-inner">
+        <!-- texto introductorio -->
+        <div class="intro-text">
+            <i class="fas fa-baby-carriage" style="margin-right: 6px; color: #c28a5c;"></i> 
+            Acompaña a mis papás 
+            <span class="parents-names">Issey & Erick</span> 
+            <i class="fas fa-heart" style="margin-left: 4px; font-size: 0.7rem; color: #e7a1c0;"></i>
+        </div>
+        <div class="intro-text" style="background: transparent; margin-top: -8px;">
+            a descubrir si seré <strong>niño o niña</strong>
+        </div>
+
+        <!-- título principal + género revelación -->
+        <div class="title-gender">
+            <h1 class="gender-title">Gender Reveal</h1>
+            <div class="sub-reveal"><i class="fas fa-gift"></i> ¡Sorpresa en grande! <i class="fas fa-gift"></i></div>
+        </div>
+
+        <!-- símbolos decorativos niño/niña -->
+        <div class="gender-symbols">
+            <div class="symbol symbol-pink"><i class="fas fa-venus"></i></div>
+            <div class="symbol question-mark"><i class="fas fa-question"></i></div>
+            <div class="symbol symbol-blue"><i class="fas fa-mars"></i></div>
+        </div>
+
+        <!-- Detalles del evento integrados (fecha y hora claros) -->
+        <div class="event-details">
+            <div class="date-badge">
+                <span><i class="fas fa-calendar-week"></i> SÁBADO</span>
+                <span class="full-date"><i class="far fa-calendar-alt"></i> 13 DE ENERO 2024</span>
+            </div>
+            <div class="time-block">
+                <i class="fas fa-clock"></i> 15:00 hrs.
+            </div>
+            <div style="font-size: 0.7rem; margin-top: 10px; color:#b4937a;">
+                <i class="fas fa-hourglass-half"></i> ¡Puntualidad, la emoción comenzará puntual!
+            </div>
+        </div>
+
+        <!-- ubicación con estilo -->
+        <div class="location-box">
+            <div class="location-icon">
+                <i class="fas fa-map-pin"></i>
+            </div>
+            <div class="venue">
+                Salón de eventos <strong>Elleganza</strong>
+                <span><i class="fas fa-location-dot"></i> Terraza Jardín • Ambiente acogedor</span>
+            </div>
+        </div>
+
+        <!-- botones de acción -->
+        <div class="button-group">
+            <a href="#" class="btn-action btn-map" id="mapBtn">
+                <i class="fas fa-map-marker-alt"></i> Ver Ubicación
+                <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+            </a>
+            <a href="#" class="btn-action btn-confirm" id="confirmBtn">
+                <i class="fas fa-check-circle"></i> Confirmar Asistencia
+                <i class="fas fa-envelope-open-text"></i>
+            </a>
+        </div>
+
+        <!-- frase de cierre y detalles extra -->
+        <div class="footer-message">
+            ✨ ¡Te esperamos! ✨
+        </div>
+        <div class="small-note">
+            <i class="fas fa-camera"></i> Código: pastel o casual · ¡trae tu mejor energía!
+        </div>
+    </div>
+</div>
+
+<script>
+    // Generar elementos flotantes (estrellas, confetti) en tonos rosa y azul pastel para ambientar
+    function createFloatingElements() {
+        const container = document.getElementById('floatingDecor');
+        if (!container) return;
+        const colors = ['#f9c7d9', '#b8d6ff', '#f7e0c5', '#f4bac3', '#9fc7f0', '#e9bbcf', '#b9d8ff'];
+        const shapes = ['star', 'confetti'];
+        // limpiar si existe
+        container.innerHTML = '';
+        const elementCount = window.innerWidth < 700 ? 35 : 55;
+        for (let i = 0; i < elementCount; i++) {
+            const el = document.createElement('div');
+            const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
+            el.classList.add(shapeType);
+            // asignar color aleatorio pastel
+            const colorChoice = colors[Math.floor(Math.random() * colors.length)];
+            el.style.color = colorChoice;
+            el.style.backgroundColor = colorChoice;
+            // tamaño aleatorio entre 4px y 15px
+            const size = Math.floor(Math.random() * 12) + 4;
+            el.style.width = size + 'px';
+            el.style.height = size + 'px';
+            if (shapeType === 'star') {
+                // forma de estrella simple con clip-path o rotación? usamos circulo con pseudo efecto, pero dejamos circulos y algunos como estrellitas
+                el.style.backgroundColor = colorChoice;
+                el.style.opacity = Math.random() * 0.5 + 0.2;
+                // algunas variantes de forma
+                if (Math.random() > 0.6) {
+                    el.style.clipPath = 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+                    el.style.borderRadius = '0';
+                } else {
+                    el.style.borderRadius = '50%';
+                }
+            } else {
+                el.style.borderRadius = '2px';
+                el.style.transform = `rotate(${Math.random() * 60}deg)`;
+                el.style.width = (size * 0.8) + 'px';
+                el.style.height = (size * 0.6) + 'px';
+            }
+            // posicion aleatoria en toda la pantalla
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            el.style.left = posX + '%';
+            el.style.top = posY + '%';
+            el.style.position = 'absolute';
+            // animacion diferente duración y delay
+            const duration = Math.random() * 12 + 8;
+            const delay = Math.random() * 8;
+            el.style.animation = `floatAround ${duration}s infinite ease-in-out`;
+            el.style.animationDelay = `${delay}s`;
+            container.appendChild(el);
+        }
+    }
+
+    // función adicional para añadir pequeñas ondas o destellos dinámicos en el fondo
+    function addSparkleOnHover() {
+        const card = document.querySelector('.invitation-card');
+        if (!card) return;
+        card.addEventListener('mousemove', function(e) {
+            const spark = document.createElement('div');
+            spark.classList.add('temp-spark');
+            spark.style.position = 'absolute';
+            spark.style.width = '8px';
+            spark.style.height = '8px';
+            spark.style.background = 'radial-gradient(circle, #ffb6c1, #9ac0f0)';
+            spark.style.borderRadius = '50%';
+            spark.style.pointerEvents = 'none';
+            spark.style.zIndex = '999';
+            spark.style.opacity = '0.7';
+            spark.style.left = (e.clientX - card.getBoundingClientRect().left - 4) + 'px';
+            spark.style.top = (e.clientY - card.getBoundingClientRect().top - 4) + 'px';
+            card.style.position = 'relative';
+            card.appendChild(spark);
+            setTimeout(() => { spark.remove(); }, 600);
+        });
+    }
+
+    // botones demostrativos - simular acción (mejora experiencia)
+    function setupButtons() {
+        const mapButton = document.getElementById('mapBtn');
+        const confirmButton = document.getElementById('confirmBtn');
+        if (mapButton) {
+            mapButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('📍 Salón Elleganza: Av. de los Sueños 234, Col. Jardín. Podrás ver la ubicación exacta en el mapa cuando confirmes asistencia. 🌸');
+                // Aquí se podría integrar un enlace real a Google Maps
+            });
+        }
+        if (confirmButton) {
+            confirmButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('✨ ¡Gracias por confirmar! Esperamos compartir juntos este momento mágico. Pronto recibirás los detalles por mensaje. 🎀💙');
+                // Se puede redirigir a un formulario o WhatsApp
+            });
+        }
+    }
+
+    // adaptar elementos flotantes al resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            createFloatingElements();
+        }, 200);
+    });
+
+    // Inicializar todas las mejoras
+    window.addEventListener('load', () => {
+        createFloatingElements();
+        addSparkleOnHover();
+        setupButtons();
+        // agregar efecto de rebote suave al cargar los botones
+        const btns = document.querySelectorAll('.btn-action');
+        btns.forEach((btn, idx) => {
+            btn.style.animation = `cardGlide 0.5s ease-out ${idx * 0.1}s backwards`;
+        });
+    });
+</script>
+
+<style>
+    /* Ajustes extra para animaciones sin romper responsividad */
+    .temp-spark {
+        animation: fadeOutSpark 0.5s forwards;
+    }
+    @keyframes fadeOutSpark {
+        0% { transform: scale(1); opacity: 0.8; }
+        100% { transform: scale(2); opacity: 0; }
+    }
+    .btn-action {
+        cursor: pointer;
+    }
+    .invitation-card {
+        transition: transform 0.2s ease, box-shadow 0.2s;
+    }
+    .invitation-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 35px 55px rgba(0,0,0,0.12);
+    }
+    /* detalles extra de tipografía */
+    .full-date, .time-block {
+        font-weight: 600;
+    }
+    .parents-names {
+        font-size: 1.05rem;
+    }
+    i.fa, i.far, i.fas {
+        pointer-events: none;
+    }
+    /* eliminar subrayado de botones */
+    .btn-action {
+        text-decoration: none;
+    }
+</style>
+</body>
+</html>
