@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gender Reveal · Joseph & Cely</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Gender Reveal · Joseph & Cely · 09 Mayo 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -76,13 +76,6 @@
         0 0 0 1px rgba(255,230,200,0.5) inset;
       text-align: center;
       scrollbar-width: none;
-      /*
-        ★ FONDO DE TARJETA ★
-        Reemplaza la URL por la ruta local de tu imagen:
-           background-image: url('osos-nubes.png');
-        La imagen cubre toda la tarjeta sin recortarse con background-size: cover
-        y se ancla desde la parte superior con background-position: center top
-      */
       background-image: url('https://raw.githubusercontent.com/josephom27/revelacion-de-genero/main/Osos%20de%20peluche%20flotando%20entre%20nubes.png');
       background-size: cover;
       background-position: center top;
@@ -119,7 +112,6 @@
       flex-shrink: 0;
     }
 
-    /* Anillo dorado giratorio — delgado */
     .eco-ring {
       position: absolute; inset: -3px;
       border-radius: 50%;
@@ -142,21 +134,12 @@
     @keyframes spin-slow { to { transform: rotate(360deg); } }
 
     .eco-inner-ring {
-      position: absolute; inset: 3px;   /* grosor visible del aro: 3+3 = 6px total */
+      position: absolute; inset: 3px;
       border-radius: 50%;
       background: rgba(255,255,255,0.95);
       box-shadow: inset 0 0 8px rgba(200,160,80,0.15);
     }
 
-    /*
-      ★ TU IMAGEN DE ECOGRAFÍA ★
-      Reemplaza el bloque .eco-placeholder por:
-      <img class="eco-img" src="ecografia.png" alt="Ecografía">
-
-      Nombre sugerido: ecografia.png
-      Tamaño ideal: cuadrada, mínimo 300×300 px
-      Se mostrará recortada en círculo automáticamente
-    */
     .eco-img {
       position: absolute;
       inset: 6px;
@@ -182,7 +165,6 @@
       font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
     }
 
-    /* Estrellas en los 4 polos del anillo */
     .eco-star {
       position: absolute; color: var(--gold2);
       font-size: clamp(0.55rem, 1.4vw, 0.72rem);
@@ -210,7 +192,6 @@
       backdrop-filter: blur(4px);
     }
 
-    /* ─── Título Gender Reveal ─── */
     .title-wrap {
       padding: 0.5rem 0.5rem 0.7rem;
       overflow: visible;
@@ -229,7 +210,6 @@
       padding: 0.18em 0 0.22em;
     }
 
-    /* ─── Divisor ─── */
     .divider {
       display: flex; align-items: center; gap: 0.55rem;
       color: var(--gold); margin: 0.4rem 0;
@@ -240,7 +220,6 @@
     }
     .divider i { font-size: 0.55rem; }
 
-    /* ─── Símbolos género ─── */
     .gender-row {
       display: flex; align-items: center; justify-content: center;
       gap: clamp(0.9rem, 3.5vw, 1.8rem); margin: 0.25rem 0 0.65rem;
@@ -250,7 +229,6 @@
     .icon-q    { color: var(--sand); }
     .icon-boy  { color: var(--sky);  }
 
-    /* ─── Info box ─── */
     .info-box {
       background: rgba(255,250,244,0.82);
       border: 1px solid rgba(196,149,106,0.2);
@@ -282,7 +260,7 @@
     }
     .info-value.big { font-size: clamp(0.88rem, 2.6vw, 1rem); }
 
-    /* ─── Botones ─── */
+    /* ─── Botones y menú de navegación ─── */
     .btn-group {
       display: flex; flex-wrap: wrap;
       justify-content: center; gap: 0.55rem;
@@ -308,7 +286,74 @@
     }
     .btn-outline:hover { background: #ffe8d8; transform: translateY(-2px); }
 
-    /* ─── Firma ─── */
+    /* Menú flotante para elegir app de navegación/taxi */
+    .menu-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .menu-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .menu-card {
+      background: var(--cream);
+      border-radius: 32px;
+      width: 85%;
+      max-width: 320px;
+      padding: 1.6rem 1.2rem;
+      text-align: center;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+      border: 1px solid var(--gold);
+    }
+    .menu-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--brown);
+      margin-bottom: 1rem;
+    }
+    .menu-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin: 1.2rem 0;
+    }
+    .menu-option {
+      background: rgba(255,248,240,0.9);
+      border-radius: 60px;
+      padding: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      color: var(--brown);
+      text-decoration: none;
+      border: 1px solid rgba(196,149,106,0.3);
+      transition: all 0.2s;
+    }
+    .menu-option i { font-size: 1.2rem; width: 28px; }
+    .menu-option:hover { background: #fff; transform: scale(1.02); border-color: var(--gold); }
+    .close-menu {
+      background: var(--sand);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+
     .sign {
       font-family: 'Great Vibes', cursive;
       font-size: clamp(1.3rem, 4.2vw, 1.8rem);
@@ -320,7 +365,7 @@
       padding-top: 0.55rem; margin-top: 0.55rem;
     }
 
-    /* ════ SLIDE 2: REGALOS ════ */
+    /* SLIDE 2: REGALOS */
     .section-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.25rem, 4.2vw, 1.65rem);
@@ -357,7 +402,6 @@
     }
     .gift-detail { font-size: clamp(0.65rem, 1.9vw, 0.73rem); color: var(--soft); line-height: 1.4; }
 
-    /* ─── Corazón latiendo (slide 2) ─── */
     .heartbeat-icon {
       font-size: clamp(1.6rem, 5vw, 2.1rem);
       color: var(--rose);
@@ -373,7 +417,6 @@
       56%      { transform: scale(1);    }
     }
 
-    /* ─── Frase poética (slide 2) ─── */
     .quote-banner {
       display: flex; align-items: center; justify-content: center; gap: 0.7rem;
       background: linear-gradient(135deg, rgba(242,217,205,0.6), rgba(221,238,249,0.6));
@@ -392,7 +435,6 @@
       flex: 1;
     }
 
-    /* ─── Nav dots ─── */
     .nav-dots {
       position: fixed; right: clamp(10px,2.5vw,20px);
       top: 50%; transform: translateY(-50%);
@@ -401,7 +443,6 @@
     .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(122,79,52,0.22); cursor: pointer; transition: all 0.3s; }
     .dot.active { background: var(--gold); transform: scale(1.5); }
 
-    /* ─── Scroll hint ─── */
     .scroll-hint {
       position: fixed; bottom: clamp(12px,3.5vw,20px);
       left: 50%; transform: translateX(-50%);
@@ -418,7 +459,6 @@
       50%      { transform: translateX(-50%) translateY(6px); }
     }
 
-    /* ─── Stagger animación ─── */
     .slide.active .card-content > * { animation: fadeUp 0.5s ease both; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(13px); } to { opacity:1; transform:translateY(0); } }
     .slide.active .card-content > *:nth-child(1) { animation-delay:.04s; }
@@ -447,134 +487,62 @@
 <div class="bg-layer"></div>
 <div class="viewport" id="viewport">
 
-  <!-- ═══ SLIDE 0: INVITACIÓN ═══ -->
+  <!-- SLIDE 0: INVITACIÓN -->
   <div class="slide active" data-index="0">
     <div class="card">
       <div class="card-overlay"></div>
       <div class="card-content">
-
-        <!--
-          ★ ECOGRAFÍA ★
-          IMAGEN CAMBIADA A "papas.png" EN ESTA PRIMERA TARJETA
-        -->
         <div class="eco-wrap">
           <div class="eco-ring"></div>
           <div class="eco-inner-ring"></div>
-          <!--
-            ★ Se cambió la URL: de ecografia.png a papas.png
-            ★ Formato correcto de GitHub raw: usuario/repo/rama/archivo
-          -->
           <img class="eco-img" src="https://raw.githubusercontent.com/josephom27/revelacion-de-genero/main/papas.png" alt="Ecografía"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="eco-placeholder" style="display:none;">
-            <i class="fas fa-heartbeat"></i>
-            <span>papas.png</span>
-          </div>
-          <i class="fas fa-star eco-star"></i>
-          <i class="fas fa-star eco-star"></i>
-          <i class="fas fa-star eco-star"></i>
-          <i class="fas fa-star eco-star"></i>
+          <div class="eco-placeholder" style="display:none;"><i class="fas fa-heartbeat"></i><span>papas.png</span></div>
+          <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
+          <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
         </div>
-
-        <div class="pill">
-          <i class="fas fa-baby-carriage"></i>
-          Acompaña a mis papás <strong>Joseph &amp; Cely</strong>
-        </div>
-
-        <div style="font-size:clamp(0.72rem,2.2vw,0.82rem);color:var(--soft);margin-bottom:0.08rem;font-weight:500;">
-          a descubrir si seré <strong style="color:var(--brown)">niño o niña</strong>
-        </div>
-
-        <!-- 
-          line-height:1.3 + padding-bottom:0.1em aseguran
-          que Great Vibes no se corte arriba ni abajo
-        -->
-        <div class="title-wrap">
-          <span class="title-script">Gender Reveal</span>
-        </div>
-
-        <div class="divider">
-          <i class="fas fa-diamond"></i>
-          <i class="fas fa-diamond"></i>
-          <i class="fas fa-diamond"></i>
-        </div>
-
-        <div class="gender-row">
-          <i class="fas fa-venus icon-girl"></i>
-          <i class="fas fa-question icon-q"></i>
-          <i class="fas fa-mars icon-boy"></i>
-        </div>
-
+        <div class="pill"><i class="fas fa-baby-carriage"></i>Acompaña a mis papás <strong>Joseph &amp; Cely</strong></div>
+        <div style="font-size:clamp(0.72rem,2.2vw,0.82rem);color:var(--soft);margin-bottom:0.08rem;font-weight:500;">a descubrir si seré <strong style="color:var(--brown)">niño o niña</strong></div>
+        <div class="title-wrap"><span class="title-script">Gender Reveal</span></div>
+        <div class="divider"><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i></div>
+        <div class="gender-row"><i class="fas fa-venus icon-girl"></i><i class="fas fa-question icon-q"></i><i class="fas fa-mars icon-boy"></i></div>
+        
         <div class="info-box">
-          <div class="info-row">
-            <div class="info-icon"><i class="far fa-calendar-alt"></i></div>
-            <div>
-              <div class="info-label">Fecha</div>
-              <div class="info-value big">Sábado 13 de enero · 2024</div>
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon"><i class="far fa-clock"></i></div>
-            <div>
-              <div class="info-label">Hora</div>
-              <div class="info-value big">6:00 PM</div>
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon"><i class="fas fa-map-pin"></i></div>
-            <div>
-              <div class="info-label">Lugar</div>
-              <div class="info-value">Mz "B" Lt 12 · MONTE AZUL III Etapa<br>San Martín de Porres</div>
-            </div>
-          </div>
+          <div class="info-row"><div class="info-icon"><i class="far fa-calendar-alt"></i></div><div><div class="info-label">Fecha</div><div class="info-value big">Sábado 09 de Mayo · 2026</div></div></div>
+          <div class="info-row"><div class="info-icon"><i class="far fa-clock"></i></div><div><div class="info-label">Hora</div><div class="info-value big">6:00 PM</div></div></div>
+          <div class="info-row"><div class="info-icon"><i class="fas fa-map-pin"></i></div><div><div class="info-label">Lugar</div><div class="info-value">Mz "B" Lt 12 · MONTE AZUL III Etapa<br>San Martín de Porres</div></div></div>
         </div>
 
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/srEmecwqSoEUCdUx6" target="_blank" class="btn btn-outline">
-            <i class="fas fa-map-marker-alt"></i> Ver mapa
-          </a>
+          <!-- Botón que abre el menú de navegación/taxis -->
+          <button class="btn btn-outline" id="openMapMenuBtn">
+            <i class="fas fa-map-marker-alt"></i> ¿Cómo llegar?
+          </button>
           <button class="btn btn-primary" id="confirmBtn">
             <i class="fas fa-check"></i> Confirmar asistencia
           </button>
         </div>
 
         <div class="sign">¡Te esperamos!</div>
-
-        <div class="note">
-          <i class="fas fa-chevron-down"></i>&nbsp; Desliza para ver sugerencias de regalo
-        </div>
-
+        <div class="note"><i class="fas fa-chevron-down"></i>&nbsp; Desliza para ver sugerencias de regalo</div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ SLIDE 1: REGALOS ═══ -->
+  <!-- SLIDE 1: REGALOS -->
   <div class="slide" data-index="1">
     <div class="card">
       <div class="card-overlay"></div>
       <div class="card-content">
-
-        <!-- ★ SE AGREGA LA ECOGRAFÍA TAMBIÉN AQUÍ EN SEGUNDA TARJETA ★ -->
         <div class="eco-wrap">
           <div class="eco-ring"></div>
           <div class="eco-inner-ring"></div>
-          <!--
-            ★ Aquí mantenemos ecografia.png (o la imagen que quieras para la segunda)
-            ★ Se usa el mismo enlace de ecografía para mantener coherencia visual.
-          -->
           <img class="eco-img" src="https://raw.githubusercontent.com/josephom27/revelacion-de-genero/main/ecografia.png" alt="Ecografía"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="eco-placeholder" style="display:none;">
-            <i class="fas fa-heartbeat"></i>
-            <span>ecografia.png</span>
-          </div>
-          <i class="fas fa-star eco-star"></i>
-          <i class="fas fa-star eco-star"></i>
-          <i class="fas fa-star eco-star"></i>
-          <i class="fas fa-star eco-star"></i>
+          <div class="eco-placeholder" style="display:none;"><i class="fas fa-heartbeat"></i><span>ecografia.png</span></div>
+          <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
+          <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
         </div>
-
-        <!-- Banner de frase poética con corazón latiendo adentro -->
         <div class="quote-banner">
           <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; flex:1;">
             <i class="fas fa-heartbeat heartbeat-icon"></i>
@@ -585,55 +553,19 @@
             </div>
           </div>
         </div>
-
-        <div class="divider" style="margin:0.5rem 0;">
-          <i class="fas fa-diamond"></i>
-          <i class="fas fa-diamond"></i>
-          <i class="fas fa-diamond"></i>
-        </div>
-
-        <div class="section-title">
-          <i class="fas fa-gift" style="color:var(--gold);margin-right:0.38rem;"></i>
-          Sugerencias de regalo
-        </div>
+        <div class="divider" style="margin:0.5rem 0;"><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i></div>
+        <div class="section-title"><i class="fas fa-gift" style="color:var(--gold);margin-right:0.38rem;"></i>Sugerencias de regalo</div>
         <p class="section-sub">Según el género que se revele, te invitamos a traer:</p>
-
         <div class="gift-grid">
-          <div class="gift-card" id="giftBoy">
-            <div class="gift-icon-wrap boy"><i class="fas fa-mars"></i></div>
-            <div class="gift-name">Si es niño</div>
-            <div class="gift-detail"><strong>Pañales</strong><br>Talla RN o 1</div>
-          </div>
-          <div class="gift-card" id="giftGirl">
-            <div class="gift-icon-wrap girl"><i class="fas fa-venus"></i></div>
-            <div class="gift-name">Si es niña</div>
-            <div class="gift-detail"><strong>Pañitos húmedos</strong><br>Sin alcohol · Hipoalergénicos</div>
-          </div>
+          <div class="gift-card" id="giftBoy"><div class="gift-icon-wrap boy"><i class="fas fa-mars"></i></div><div class="gift-name">Si es niño</div><div class="gift-detail"><strong>Pañales</strong><br>Talla RN o 1</div></div>
+          <div class="gift-card" id="giftGirl"><div class="gift-icon-wrap girl"><i class="fas fa-venus"></i></div><div class="gift-name">Si es niña</div><div class="gift-detail"><strong>Pañitos húmedos</strong><br>Sin alcohol · Hipoalergénicos</div></div>
         </div>
-
-        <div class="info-box" style="text-align:left;margin-top:0.4rem;">
-          <div class="info-row" style="margin-bottom:0">
-            <div class="info-icon"><i class="fas fa-question"></i></div>
-            <div>
-              <div class="info-label">¿No sabes qué traer?</div>
-              <div class="info-value">¡Ambas opciones son bienvenidas! El misterio se revela ese día.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="note" style="margin-top:0.55rem;">
-          <i class="fas fa-coins" style="color:var(--gold)"></i>&nbsp;
-          También aceptamos aporte en efectivo para la canastilla
-        </div>
-
-        <div class="sign" style="font-size:clamp(1.2rem,3.8vw,1.6rem);margin-top:0.4rem;">
-          ¡Gracias por tu cariño!
-        </div>
-
+        <div class="info-box" style="text-align:left;margin-top:0.4rem;"><div class="info-row" style="margin-bottom:0"><div class="info-icon"><i class="fas fa-question"></i></div><div><div class="info-label">¿No sabes qué traer?</div><div class="info-value">¡Ambas opciones son bienvenidas! El misterio se revela ese día.</div></div></div></div>
+        <div class="note" style="margin-top:0.55rem;"><i class="fas fa-coins" style="color:var(--gold)"></i>&nbsp; También aceptamos aporte en efectivo para la canastilla</div>
+        <div class="sign" style="font-size:clamp(1.2rem,3.8vw,1.6rem);margin-top:0.4rem;">¡Gracias por tu cariño!</div>
       </div>
     </div>
   </div>
-
 </div>
 
 <nav class="nav-dots" id="navDots">
@@ -641,8 +573,20 @@
   <div class="dot" data-target="1"></div>
 </nav>
 
-<div class="scroll-hint" id="scrollHint">
-  <i class="fas fa-chevron-down"></i> Desliza para ver regalos
+<div class="scroll-hint" id="scrollHint"><i class="fas fa-chevron-down"></i> Desliza para ver regalos</div>
+
+<!-- Menú flotante para elegir app de navegación / taxi -->
+<div id="transportMenu" class="menu-overlay">
+  <div class="menu-card">
+    <h3><i class="fas fa-taxi"></i> ¿Cómo llegas?</h3>
+    <div class="menu-options">
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Mz+%22B%22+Lt+12+MONTE+AZUL+III+Etapa+San+Mart%C3%ADn+de+Porres" target="_blank" class="menu-option"><i class="fab fa-google"></i> Google Maps</a>
+      <a href="https://waze.com/ul?ll=-12.046374,-77.042793&navigate=yes" target="_blank" class="menu-option"><i class="fab fa-waze"></i> Waze</a>
+      <a href="https://m.uber.com/ul/?action=setPickup&client_id=YOUR_CLIENT_ID&dropoff[formatted_address]=Mz%20%22B%22%20Lt%2012%20MONTE%20AZUL%20III%20Etapa%20San%20Mart%C3%ADn%20de%20Porres" target="_blank" class="menu-option"><i class="fab fa-uber"></i> Uber</a>
+      <a href="https://indrive.page.link/?link=https://indrive.app/link?address=Mz%20%22B%22%20Lt%2012%20MONTE%20AZUL%20III%20Etapa%20San%20Mart%C3%ADn%20de%20Porres" target="_blank" class="menu-option"><i class="fas fa-car"></i> inDrive</a>
+    </div>
+    <button class="close-menu" id="closeMenuBtn">Cerrar</button>
+  </div>
 </div>
 
 <script>
@@ -707,11 +651,33 @@
 
   dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.target)));
 
+  // Confirmar asistencia por WhatsApp
   document.getElementById('confirmBtn').addEventListener('click', () => {
-    const msg = encodeURIComponent('¡Hola! Confirmo mi asistencia al Gender Reveal de Joseph & Cely. ¡Ahí estaré!');
+    const msg = encodeURIComponent('¡Hola! Confirmo mi asistencia al Gender Reveal de Joseph & Cely el 09 de Mayo 2026. ¡Ahí estaré!');
     window.open('https://wa.me/51955055272?text=' + msg, '_blank');
   });
 
+  // Lógica para el menú de transporte (Uber, inDrive, Mapas, Waze)
+  const openMenuBtn = document.getElementById('openMapMenuBtn');
+  const menuOverlay = document.getElementById('transportMenu');
+  const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+  openMenuBtn.addEventListener('click', () => {
+    menuOverlay.classList.add('active');
+  });
+
+  closeMenuBtn.addEventListener('click', () => {
+    menuOverlay.classList.remove('active');
+  });
+
+  // Cerrar menú si se hace clic fuera de la tarjeta (en el overlay)
+  menuOverlay.addEventListener('click', (e) => {
+    if (e.target === menuOverlay) {
+      menuOverlay.classList.remove('active');
+    }
+  });
+
+  // Lógica de regalos
   const boyCard  = document.getElementById('giftBoy');
   const girlCard = document.getElementById('giftGirl');
   boyCard.addEventListener('click', () => {
