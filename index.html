@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Gender Reveal · Joseph & Cely · 09 Mayo 2026</title>
+  <title>Gender Reveal · Joseph & Cely · 16 Mayo 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -17,9 +17,8 @@
       --gold2:   #e8c96a;
       --brown:   #7a4f34;
       --soft:    #a07060;
-      --white85: rgba(255,250,245,0.82);
-      --card-r:  36px;
       --trans:   0.68s cubic-bezier(0.77,0,0.18,1);
+      --card-r:  36px;
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -41,6 +40,7 @@
         linear-gradient(160deg, #fdf6ef 0%, #f5e8e0 100%);
     }
 
+    /* ─── VIEWPORT & SLIDES ─── */
     .viewport {
       position: relative; z-index: 1;
       height: 100dvh; width: 100vw;
@@ -50,7 +50,7 @@
     .slide {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      padding: clamp(0.8rem, 3vw, 2rem);
+      padding: clamp(0.8rem, 3vw, 1.6rem);
       transform: translateY(100%);
       opacity: 0;
       transition: transform var(--trans), opacity var(--trans);
@@ -63,25 +63,25 @@
       pointer-events: all;
     }
 
-    /* ════ TARJETA: osos como fondo ════ */
+    /* ─── CARD ─── */
     .card {
       position: relative;
-      width: min(480px, 100%);
-      max-height: calc(100dvh - clamp(1.6rem, 6vw, 4rem));
-      overflow-y: auto;
-      overflow-x: hidden;
+      width: min(460px, 100%);
+      /* fill viewport minus padding, no scroll */
+      max-height: calc(100dvh - clamp(1.6rem, 6vw, 3.2rem));
       border-radius: var(--card-r);
       box-shadow:
         0 40px 80px rgba(100,55,30,0.22),
         0 0 0 1px rgba(255,230,200,0.5) inset;
       text-align: center;
-      scrollbar-width: none;
       background-image: url('https://raw.githubusercontent.com/josephom27/revelacion-de-genero/main/Osos%20de%20peluche%20flotando%20entre%20nubes.png');
       background-size: cover;
       background-position: center top;
-      background-repeat: no-repeat;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      overflow: visible;
     }
-    .card::-webkit-scrollbar { display: none; }
 
     .card-overlay {
       position: absolute; inset: 0;
@@ -90,187 +90,160 @@
         180deg,
         rgba(255,248,240,0.52) 0%,
         rgba(255,248,240,0.76) 35%,
-        rgba(255,248,240,0.90) 100%
+        rgba(255,248,240,0.92) 100%
       );
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
     .card-content {
-      position: relative;
-      z-index: 1;
-      padding: clamp(1.2rem, 4vw, 2rem) clamp(1.1rem, 4vw, 2rem) clamp(1rem, 3vw, 1.6rem);
+      position: relative; z-index: 1;
+      padding: clamp(0.6rem, 2vw, 1.2rem) clamp(1rem, 3.5vw, 1.8rem) clamp(0.8rem, 2.5vw, 1.4rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
     }
 
-    /* ════ ECOGRAFÍA CIRCULAR CON MARCO DORADO ════ */
+    /* ─── ECO RING ─── */
     .eco-wrap {
       position: relative;
-      width: clamp(110px, 28vw, 148px);
-      height: clamp(110px, 28vw, 148px);
-      margin: 0 auto clamp(0.7rem, 2vw, 1.1rem);
+      width: clamp(110px, 26vw, 150px);
+      height: clamp(110px, 26vw, 150px);
       flex-shrink: 0;
+      margin-bottom: clamp(0.45rem, 1.5vw, 0.8rem);
+      margin-top: clamp(-30px, -6vw, -20px);
+      z-index: 2;
     }
-
     .eco-ring {
-      position: absolute; inset: -3px;
-      border-radius: 50%;
+      position: absolute; inset: -3px; border-radius: 50%;
       background: conic-gradient(
-        var(--gold2) 0deg,
-        var(--gold)  55deg,
-        #f5dfa0      88deg,
-        var(--gold)  120deg,
-        var(--gold2) 180deg,
-        var(--gold)  235deg,
-        #f5dfa0      268deg,
-        var(--gold)  300deg,
-        var(--gold2) 360deg
+        var(--gold2) 0deg, var(--gold) 55deg, #f5dfa0 88deg,
+        var(--gold) 120deg, var(--gold2) 180deg, var(--gold) 235deg,
+        #f5dfa0 268deg, var(--gold) 300deg, var(--gold2) 360deg
       );
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.6),
-        0 4px 14px rgba(180,130,50,0.35);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.6), 0 4px 14px rgba(180,130,50,0.35);
       animation: spin-slow 18s linear infinite;
     }
     @keyframes spin-slow { to { transform: rotate(360deg); } }
-
     .eco-inner-ring {
-      position: absolute; inset: 3px;
-      border-radius: 50%;
+      position: absolute; inset: 3px; border-radius: 50%;
       background: rgba(255,255,255,0.95);
-      box-shadow: inset 0 0 8px rgba(200,160,80,0.15);
     }
-
     .eco-img {
-      position: absolute;
-      inset: 6px;
-      border-radius: 50%;
-      width: calc(100% - 12px);
-      height: calc(100% - 12px);
-      object-fit: cover;
-      object-position: center;
-      z-index: 1;
+      position: absolute; inset: 6px; border-radius: 50%;
+      width: calc(100% - 12px); height: calc(100% - 12px);
+      object-fit: cover; object-position: center; z-index: 1;
     }
-
     .eco-placeholder {
-      position: absolute; inset: 6px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #1a1a2e 100%);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      position: absolute; inset: 6px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a2e, #2d2d44, #1a1a2e);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 3px; z-index: 1;
     }
-    .eco-placeholder i { font-size: clamp(1.5rem, 4.5vw, 2rem); color: rgba(255,255,255,0.38); }
-    .eco-placeholder span {
-      font-size: 0.52rem; color: rgba(255,255,255,0.45);
-      font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-    }
-
+    .eco-placeholder i { font-size: 1.5rem; color: rgba(255,255,255,0.38); }
     .eco-star {
       position: absolute; color: var(--gold2);
-      font-size: clamp(0.55rem, 1.4vw, 0.72rem);
-      z-index: 2; animation: tw 2.5s ease-in-out infinite;
+      font-size: 0.6rem; z-index: 2;
+      animation: tw 2.5s ease-in-out infinite;
     }
-    .eco-star:nth-child(3) { top:-5px;   left:50%;  transform:translateX(-50%); }
-    .eco-star:nth-child(4) { bottom:-5px;left:50%;  transform:translateX(-50%); animation-delay:.8s; }
-    .eco-star:nth-child(5) { left:-5px;  top:50%;   transform:translateY(-50%); animation-delay:1.6s; }
-    .eco-star:nth-child(6) { right:-5px; top:50%;   transform:translateY(-50%); animation-delay:2.4s; }
-    @keyframes tw {
-      0%,100% { opacity:1; }
-      50%      { opacity:.3; }
-    }
+    .eco-star:nth-child(3) { top:-4px; left:50%; transform:translateX(-50%); }
+    .eco-star:nth-child(4) { bottom:-4px; left:50%; transform:translateX(-50%); animation-delay:.8s; }
+    .eco-star:nth-child(5) { left:-4px; top:50%; transform:translateY(-50%); animation-delay:1.6s; }
+    .eco-star:nth-child(6) { right:-4px; top:50%; transform:translateY(-50%); animation-delay:2.4s; }
+    @keyframes tw { 0%,100%{opacity:1} 50%{opacity:.3} }
 
+    /* ─── TYPOGRAFÍA ─── */
     .pill {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      background: rgba(255,248,240,0.78);
+      background: rgba(255,248,240,0.82);
       border: 1px solid rgba(196,149,106,0.35);
       color: var(--brown);
-      font-size: clamp(0.68rem, 2vw, 0.78rem);
+      font-size: clamp(0.65rem, 1.9vw, 0.76rem);
       font-weight: 600; letter-spacing: 0.04em;
-      padding: 0.28rem 0.85rem; border-radius: 60px;
-      margin-bottom: 0.35rem;
-      backdrop-filter: blur(4px);
+      padding: 0.25rem 0.8rem; border-radius: 60px;
+      margin-bottom: 0.2rem;
     }
 
-    .title-wrap {
-      padding: 0.5rem 0.5rem 0.7rem;
-      overflow: visible;
-      display: block;
-    }
     .title-script {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.4rem, 8vw, 3.5rem);
-      line-height: 1.45;
+      font-size: clamp(2.2rem, 7.5vw, 3.2rem);
+      line-height: 1.3;
       background: linear-gradient(130deg, var(--rose) 20%, var(--sky) 80%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      padding: 0.1em 0 0.15em;
       display: block;
-      overflow: visible;
-      padding: 0.18em 0 0.22em;
+    }
+
+    .sub-text {
+      font-size: clamp(0.68rem, 2vw, 0.78rem);
+      color: var(--soft); font-weight: 500; margin-bottom: 0.1rem;
     }
 
     .divider {
-      display: flex; align-items: center; gap: 0.55rem;
-      color: var(--gold); margin: 0.4rem 0;
+      display: flex; align-items: center; gap: 0.5rem;
+      color: var(--gold); margin: 0.3rem 0; width: 100%;
     }
     .divider::before, .divider::after {
-      content: ''; flex: 1; height: 1px;
+      content:''; flex:1; height:1px;
       background: linear-gradient(to right, transparent, rgba(196,149,106,0.45), transparent);
     }
-    .divider i { font-size: 0.55rem; }
+    .divider i { font-size: 0.5rem; }
 
     .gender-row {
       display: flex; align-items: center; justify-content: center;
-      gap: clamp(0.9rem, 3.5vw, 1.8rem); margin: 0.25rem 0 0.65rem;
+      gap: clamp(0.8rem, 3vw, 1.5rem); margin: 0.2rem 0 0.4rem;
     }
-    .gender-row i { font-size: clamp(1.1rem, 3.2vw, 1.5rem); }
+    .gender-row i { font-size: clamp(1rem, 3vw, 1.35rem); }
     .icon-girl { color: var(--rose); }
     .icon-q    { color: var(--sand); }
-    .icon-boy  { color: var(--sky);  }
+    .icon-boy  { color: var(--sky); }
 
+    /* ─── INFO BOX ─── */
     .info-box {
-      background: rgba(255,250,244,0.82);
+      background: rgba(255,250,244,0.85);
       border: 1px solid rgba(196,149,106,0.2);
-      border-radius: 20px;
-      padding: clamp(0.65rem, 2.2vw, 1rem) clamp(0.75rem, 2.2vw, 1.2rem);
-      margin: 0.55rem 0;
-      text-align: left;
+      border-radius: 18px;
+      padding: clamp(0.55rem, 1.8vw, 0.9rem) clamp(0.65rem, 2vw, 1.1rem);
+      margin: 0.35rem 0;
+      text-align: left; width: 100%;
       backdrop-filter: blur(4px);
     }
     .info-row {
-      display: flex; align-items: flex-start; gap: 0.55rem;
-      margin-bottom: 0.48rem;
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      margin-bottom: 0.38rem;
     }
     .info-row:last-child { margin-bottom: 0; }
     .info-icon {
-      width: 27px; height: 27px; flex-shrink: 0;
+      width: 26px; height: 26px; flex-shrink: 0;
       background: rgba(196,149,106,0.11);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: var(--sand); font-size: 0.76rem;
+      color: var(--sand); font-size: 0.72rem;
     }
     .info-label {
-      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em;
-      color: var(--soft); text-transform: uppercase; margin-bottom: 0.06rem;
+      font-size: 0.58rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--soft); text-transform: uppercase; margin-bottom: 0.04rem;
     }
     .info-value {
-      font-size: clamp(0.76rem, 2.2vw, 0.88rem);
+      font-size: clamp(0.73rem, 2.1vw, 0.85rem);
       font-weight: 600; color: var(--brown); line-height: 1.3;
     }
-    .info-value.big { font-size: clamp(0.88rem, 2.6vw, 1rem); }
+    .info-value.big { font-size: clamp(0.82rem, 2.4vw, 0.96rem); }
 
+    /* ─── BOTONES ─── */
     .btn-group {
       display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 0.55rem;
-      margin: 0.7rem 0 0.35rem;
+      justify-content: center; gap: 0.48rem;
+      margin: 0.4rem 0 0.25rem; width: 100%;
     }
     .btn {
-      display: inline-flex; align-items: center; gap: 0.42rem;
-      padding: 0.5rem 1.1rem; border-radius: 60px;
+      display: inline-flex; align-items: center; gap: 0.38rem;
+      padding: 0.46rem 1rem; border-radius: 60px;
       font-family: 'Jost', sans-serif;
-      font-size: clamp(0.7rem, 2.1vw, 0.8rem);
+      font-size: clamp(0.66rem, 2vw, 0.76rem);
       font-weight: 600; letter-spacing: 0.03em;
       text-decoration: none; cursor: pointer; border: none;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
     .btn-primary {
       background: linear-gradient(135deg, #d98fa0, #bf7890);
@@ -278,136 +251,237 @@
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(217,143,160,0.5); }
     .btn-outline {
-      background: rgba(255,250,244,0.85); color: var(--brown);
+      background: rgba(255,250,244,0.88); color: var(--brown);
       border: 1px solid rgba(196,149,106,0.4); backdrop-filter: blur(4px);
     }
     .btn-outline:hover { background: #ffe8d8; transform: translateY(-2px); }
 
     .sign {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.3rem, 4.2vw, 1.8rem);
-      color: var(--sand); margin-top: 0.45rem; line-height: 1.3;
+      font-size: clamp(1.2rem, 3.8vw, 1.65rem);
+      color: var(--sand); line-height: 1.3;
+      margin-top: auto; padding-top: 0.3rem;
     }
     .note {
-      font-size: 0.66rem; color: var(--soft);
+      font-size: 0.62rem; color: var(--soft);
       border-top: 1px dashed rgba(196,149,106,0.32);
-      padding-top: 0.55rem; margin-top: 0.55rem;
+      padding-top: 0.4rem; margin-top: 0.3rem; width: 100%;
     }
 
-    /* SLIDE 2: REGALOS */
+    /* ════ SLIDE 2: REGALOS ════ */
     .section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.25rem, 4.2vw, 1.65rem);
-      font-weight: 600; color: var(--brown); margin-bottom: 0.22rem;
+      font-size: clamp(1.15rem, 3.8vw, 1.5rem);
+      font-weight: 600; color: var(--brown);
+      margin-bottom: 0.15rem;
     }
     .section-sub {
-      font-size: clamp(0.73rem, 2.1vw, 0.8rem); color: var(--soft); margin-bottom: 0.8rem;
+      font-size: clamp(0.68rem, 2vw, 0.76rem); color: var(--soft);
+      margin-bottom: 0.5rem;
     }
+
     .gift-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(0.55rem, 1.8vw, 0.95rem); margin: 0.55rem 0;
+      gap: clamp(0.5rem, 1.8vw, 0.85rem);
+      width: 100%; margin: 0.3rem 0;
     }
     .gift-card {
       background: rgba(255,250,244,0.88);
       border: 2px solid transparent;
       border-radius: 18px;
-      padding: clamp(0.85rem, 2.6vw, 1.2rem) clamp(0.65rem, 1.8vw, 0.85rem);
+      padding: clamp(0.75rem, 2.4vw, 1.1rem) clamp(0.55rem, 1.6vw, 0.8rem);
       cursor: pointer; transition: all 0.25s ease; text-align: center;
       backdrop-filter: blur(4px);
     }
-    .gift-card:hover { border-color: var(--sand); transform: translateY(-4px); box-shadow: 0 12px 28px rgba(120,70,40,0.12); }
-    .gift-card.active { background: linear-gradient(135deg,#fde8d8,#e8f2fb); border-color: var(--gold); box-shadow: 0 12px 28px rgba(120,70,40,0.14); }
+    .gift-card:hover { border-color: var(--sand); transform: translateY(-3px); box-shadow: 0 10px 24px rgba(120,70,40,0.12); }
+    .gift-card.active { background: linear-gradient(135deg,#fde8d8,#e8f2fb); border-color: var(--gold); }
     .gift-icon-wrap {
-      width: clamp(42px, 10.5vw, 56px); height: clamp(42px, 10.5vw, 56px);
+      width: clamp(38px, 9.5vw, 50px); height: clamp(38px, 9.5vw, 50px);
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 0.55rem; font-size: clamp(1rem, 3vw, 1.35rem);
+      margin: 0 auto 0.45rem; font-size: clamp(0.95rem, 2.8vw, 1.2rem);
     }
     .gift-icon-wrap.boy  { background: rgba(122,173,212,0.18); color: var(--sky); }
     .gift-icon-wrap.girl { background: rgba(217,143,160,0.18); color: var(--rose); }
     .gift-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.82rem, 2.6vw, 1rem);
-      font-weight: 600; color: var(--brown); margin-bottom: 0.22rem;
+      font-size: clamp(0.8rem, 2.4vw, 0.95rem);
+      font-weight: 600; color: var(--brown); margin-bottom: 0.18rem;
     }
-    .gift-detail { font-size: clamp(0.65rem, 1.9vw, 0.73rem); color: var(--soft); line-height: 1.4; }
+    .gift-detail { font-size: clamp(0.62rem, 1.8vw, 0.7rem); color: var(--soft); line-height: 1.4; }
 
     .heartbeat-icon {
-      font-size: clamp(1.6rem, 5vw, 2.1rem);
+      font-size: clamp(1.4rem, 4.5vw, 1.9rem);
       color: var(--rose);
       animation: heartbeat 1.2s ease-in-out infinite;
       display: inline-block;
       filter: drop-shadow(0 2px 6px rgba(217,143,160,0.45));
     }
     @keyframes heartbeat {
-      0%,100% { transform: scale(1);    }
-      14%      { transform: scale(1.22); }
-      28%      { transform: scale(1);    }
-      42%      { transform: scale(1.15); }
-      56%      { transform: scale(1);    }
+      0%,100%{transform:scale(1)} 14%{transform:scale(1.22)}
+      28%{transform:scale(1)} 42%{transform:scale(1.15)} 56%{transform:scale(1)}
     }
 
     .quote-banner {
-      display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.6rem;
       background: linear-gradient(135deg, rgba(242,217,205,0.6), rgba(221,238,249,0.6));
       border: 1px solid rgba(196,149,106,0.22);
-      border-radius: 20px;
-      padding: clamp(0.7rem, 2.2vw, 1rem) clamp(0.8rem, 2.5vw, 1.2rem);
-      margin-bottom: 0.8rem;
+      border-radius: 18px;
+      padding: clamp(0.6rem, 2vw, 0.9rem) clamp(0.7rem, 2.2vw, 1.1rem);
+      margin-bottom: 0.55rem; width: 100%;
       backdrop-filter: blur(4px);
     }
     .quote-text {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(0.92rem, 2.8vw, 1.08rem);
-      color: var(--brown);
-      line-height: 1.45;
-      flex: 1;
+      font-size: clamp(0.88rem, 2.6vw, 1.02rem);
+      color: var(--brown); line-height: 1.42; flex: 1;
     }
 
+    /* ════ SLIDE 3: CÓDIGO DE VESTIMENTA ════ */
+    .dress-hero {
+      display: flex; flex-direction: column; align-items: center;
+      gap: clamp(0.55rem, 1.8vw, 0.9rem);
+      width: 100%;
+    }
+
+    .dress-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3.8vw, 1.55rem);
+      font-weight: 600; color: var(--brown);
+    }
+    .dress-subtitle {
+      font-size: clamp(0.68rem, 2vw, 0.76rem); color: var(--soft);
+    }
+
+    .vs-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: clamp(0.6rem, 2.5vw, 1.2rem);
+      width: 100%;
+    }
+
+    .team-card {
+      flex: 1;
+      border-radius: 22px;
+      padding: clamp(0.9rem, 2.8vw, 1.3rem) clamp(0.6rem, 2vw, 1rem);
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 0.45rem;
+      border: 2px solid transparent;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(6px);
+      cursor: default;
+    }
+    .team-card.girl {
+      background: rgba(242,217,205,0.55);
+      border-color: rgba(217,143,160,0.35);
+    }
+    .team-card.boy {
+      background: rgba(221,238,249,0.55);
+      border-color: rgba(122,173,212,0.35);
+    }
+    .team-icon {
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+    }
+    .team-icon.girl { color: var(--rose); }
+    .team-icon.boy  { color: var(--sky); }
+    .team-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.88rem, 2.5vw, 1.05rem);
+      font-weight: 600;
+    }
+    .team-label.girl { color: #b0607a; }
+    .team-label.boy  { color: #4a80a8; }
+    .team-desc {
+      font-size: clamp(0.62rem, 1.8vw, 0.7rem);
+      color: var(--soft); line-height: 1.42;
+    }
+
+    .vs-badge {
+      width: 34px; height: 34px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--rose), var(--sky));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .tip-box {
+      background: rgba(255,250,235,0.88);
+      border-left: 5px solid var(--gold);
+      border-radius: 16px;
+      padding: clamp(0.6rem, 1.8vw, 0.85rem) clamp(0.7rem, 2.2vw, 1rem);
+      width: 100%;
+      text-align: left;
+      backdrop-filter: blur(4px);
+    }
+    .tip-box p {
+      font-size: clamp(0.68rem, 1.9vw, 0.76rem);
+      color: var(--brown); line-height: 1.46;
+    }
+    .tip-box strong { color: var(--sand); }
+
+    .cash-note {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: rgba(255,248,240,0.82);
+      border: 1px solid rgba(196,149,106,0.28);
+      border-radius: 14px;
+      padding: 0.42rem 0.85rem;
+      font-size: clamp(0.64rem, 1.8vw, 0.72rem);
+      color: var(--soft); width: 100%; justify-content: center;
+    }
+    .cash-note i { color: var(--gold); font-size: 0.78rem; }
+
+    /* ─── NAV DOTS ─── */
     .nav-dots {
-      position: fixed; right: clamp(10px,2.5vw,20px);
+      position: fixed; right: clamp(10px,2.5vw,18px);
       top: 50%; transform: translateY(-50%);
       display: flex; flex-direction: column; gap: 9px; z-index: 50;
     }
     .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(122,79,52,0.22); cursor: pointer; transition: all 0.3s; }
     .dot.active { background: var(--gold); transform: scale(1.5); }
 
-    .scroll-hint {
+    /* ─── SLIDE INDICATOR ─── */
+    .slide-label {
       position: fixed; bottom: clamp(12px,3.5vw,20px);
       left: 50%; transform: translateX(-50%);
-      background: rgba(100,60,30,0.65); backdrop-filter: blur(8px);
-      color: #fff; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.05em;
-      padding: 5px 15px; border-radius: 60px; z-index: 50;
-      display: flex; align-items: center; gap: 0.38rem;
+      background: rgba(100,60,30,0.62); backdrop-filter: blur(8px);
+      color: #fff; font-size: 0.64rem; font-weight: 600; letter-spacing: 0.05em;
+      padding: 4px 13px; border-radius: 60px; z-index: 50;
+      display: flex; align-items: center; gap: 0.35rem;
       animation: float 2.5s ease-in-out infinite;
       pointer-events: none; transition: opacity 0.4s;
     }
-    .scroll-hint.hidden { opacity: 0; }
+    .slide-label.hidden { opacity: 0; }
     @keyframes float {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(6px); }
+      0%,100%{transform:translateX(-50%) translateY(0)}
+      50%{transform:translateX(-50%) translateY(6px)}
     }
 
-    .slide.active .card-content > * { animation: fadeUp 0.5s ease both; }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(13px); } to { opacity:1; transform:translateY(0); } }
-    .slide.active .card-content > *:nth-child(1) { animation-delay:.04s; }
-    .slide.active .card-content > *:nth-child(2) { animation-delay:.10s; }
-    .slide.active .card-content > *:nth-child(3) { animation-delay:.16s; }
-    .slide.active .card-content > *:nth-child(4) { animation-delay:.21s; }
-    .slide.active .card-content > *:nth-child(5) { animation-delay:.26s; }
-    .slide.active .card-content > *:nth-child(6) { animation-delay:.31s; }
-    .slide.active .card-content > *:nth-child(7) { animation-delay:.36s; }
-    .slide.active .card-content > *:nth-child(8) { animation-delay:.41s; }
+    /* ─── FADE-UP ANIMATION ─── */
+    .slide.active .card-content > * { animation: fadeUp 0.45s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .slide.active .card-content > *:nth-child(1){animation-delay:.04s}
+    .slide.active .card-content > *:nth-child(2){animation-delay:.09s}
+    .slide.active .card-content > *:nth-child(3){animation-delay:.14s}
+    .slide.active .card-content > *:nth-child(4){animation-delay:.19s}
+    .slide.active .card-content > *:nth-child(5){animation-delay:.24s}
+    .slide.active .card-content > *:nth-child(6){animation-delay:.29s}
+    .slide.active .card-content > *:nth-child(7){animation-delay:.34s}
+    .slide.active .card-content > *:nth-child(8){animation-delay:.39s}
 
-    @media (max-height: 620px) {
-      .eco-wrap { width:85px; height:85px; margin-bottom:0.4rem; }
-      .card-content { padding:.85rem .95rem; }
-      .info-box { padding:.52rem .65rem; }
-      .info-row { margin-bottom:.3rem; }
+    /* ─── RESPONSIVE ─── */
+    @media (max-height: 640px) {
+      .eco-wrap { width:74px; height:74px; margin-bottom:0.3rem; }
+      .card-content { padding:.75rem .9rem; }
+      .info-box { padding:.45rem .6rem; }
+      .info-row { margin-bottom:.28rem; }
+      .btn { padding:.38rem .85rem; }
     }
     @media (max-width: 360px) {
-      .gift-grid { gap:.48rem; }
-      .gift-card  { padding:.7rem .4rem; }
+      .gift-grid { gap:.42rem; }
+      .gift-card { padding:.65rem .38rem; }
+      .vs-row { gap:.4rem; }
     }
   </style>
 </head>
@@ -416,36 +490,37 @@
 <div class="bg-layer"></div>
 <div class="viewport" id="viewport">
 
-  <!-- SLIDE 0: INVITACIÓN -->
+  <!-- ══ SLIDE 0: INVITACIÓN ══ -->
   <div class="slide active" data-index="0">
     <div class="card">
       <div class="card-overlay"></div>
       <div class="card-content">
+
         <div class="eco-wrap">
           <div class="eco-ring"></div>
           <div class="eco-inner-ring"></div>
-          <img class="eco-img" src="https://raw.githubusercontent.com/josephom27/revelacion-de-genero/main/papas.png" alt="Ecografía"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="eco-placeholder" style="display:none;"><i class="fas fa-heartbeat"></i><span>papas.png</span></div>
+          <img class="eco-img" src="https://raw.githubusercontent.com/josephom27/revelacion-de-genero/main/papas.png" alt="Papás"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="eco-placeholder" style="display:none;"><i class="fas fa-heartbeat"></i></div>
           <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
           <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
         </div>
+
         <div class="pill"><i class="fas fa-baby-carriage"></i>Acompaña a mis papás <strong>Joseph &amp; Cely</strong></div>
-        <div style="font-size:clamp(0.72rem,2.2vw,0.82rem);color:var(--soft);margin-bottom:0.08rem;font-weight:500;">a descubrir si seré <strong style="color:var(--brown)">niño o niña</strong></div>
-        <div class="title-wrap"><span class="title-script">Gender Reveal</span></div>
+        <div class="sub-text">a descubrir si seré <strong style="color:var(--brown)">niño o niña</strong></div>
+        <span class="title-script">Gender Reveal</span>
         <div class="divider"><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i></div>
         <div class="gender-row"><i class="fas fa-venus icon-girl"></i><i class="fas fa-question icon-q"></i><i class="fas fa-mars icon-boy"></i></div>
-        
+
         <div class="info-box">
-          <div class="info-row"><div class="info-icon"><i class="far fa-calendar-alt"></i></div><div><div class="info-label">Fecha</div><div class="info-value big">Sábado 09 de Mayo · 2026</div></div></div>
+          <div class="info-row"><div class="info-icon"><i class="far fa-calendar-alt"></i></div><div><div class="info-label">Fecha</div><div class="info-value big">Sábado 16 de Mayo · 2026</div></div></div>
           <div class="info-row"><div class="info-icon"><i class="far fa-clock"></i></div><div><div class="info-label">Hora</div><div class="info-value big">6:00 PM</div></div></div>
           <div class="info-row"><div class="info-icon"><i class="fas fa-map-pin"></i></div><div><div class="info-label">Lugar</div><div class="info-value">Mz "B" Lt 12 · MONTE AZUL III Etapa<br>San Martín de Porres</div></div></div>
         </div>
 
         <div class="btn-group">
-          <!-- Botón que abre el menú de navegación/taxis -->
-          <a href="https://maps.app.goo.gl/srEmecwqSoEUCdUx6" target="_blank" class="btn btn-outline" id="openMapsBtn">
-            <i class="fas fa-map-marker-alt"></i> Ver mapa / Cómo llegar
+          <a href="https://maps.app.goo.gl/srEmecwqSoEUCdUx6" target="_blank" class="btn btn-outline">
+            <i class="fas fa-map-marker-alt"></i> Ver mapa
           </a>
           <button class="btn btn-primary" id="confirmBtn">
             <i class="fas fa-check"></i> Confirmar asistencia
@@ -453,61 +528,143 @@
         </div>
 
         <div class="sign">¡Te esperamos!</div>
-        <div class="note"><i class="fas fa-chevron-down"></i>&nbsp; Desliza para ver sugerencias de regalo</div>
+        <div class="note"><i class="fas fa-chevron-down"></i>&nbsp; Desliza para ver regalos &amp; outfit</div>
+
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 1: REGALOS -->
+  <!-- ══ SLIDE 1: SUGERENCIAS DE REGALO ══ -->
   <div class="slide" data-index="1">
     <div class="card">
       <div class="card-overlay"></div>
       <div class="card-content">
+
         <div class="eco-wrap">
           <div class="eco-ring"></div>
           <div class="eco-inner-ring"></div>
           <img class="eco-img" src="https://raw.githubusercontent.com/josephom27/revelacion-de-genero/main/ecografia.png" alt="Ecografía"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="eco-placeholder" style="display:none;"><i class="fas fa-heartbeat"></i><span>ecografia.png</span></div>
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="eco-placeholder" style="display:none;"><i class="fas fa-heartbeat"></i></div>
           <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
           <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
         </div>
+
         <div class="quote-banner">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; flex:1;">
-            <i class="fas fa-heartbeat heartbeat-icon"></i>
-            <div style="display:flex; align-items:center; gap:0.6rem; width:100%;">
-              <i class="fas fa-baby" style="color:var(--rose); font-size:1rem; flex-shrink:0;"></i>
-              <p class="quote-text">"Cada latido tuyo<br>llena de luz nuestro hogar"</p>
-              <i class="fas fa-baby" style="color:var(--sky); font-size:1rem; flex-shrink:0;"></i>
-            </div>
+          <i class="fas fa-heartbeat heartbeat-icon" style="flex-shrink:0;"></i>
+          <p class="quote-text">"Cada latido tuyo<br>llena de luz nuestro hogar"</p>
+        </div>
+
+        <div class="divider"><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i></div>
+
+        <div class="section-title"><i class="fas fa-gift" style="color:var(--gold);margin-right:0.35rem;"></i>Sugerencias de regalo</div>
+        <p class="section-sub">Según el género que se revele, te invitamos a traer:</p>
+
+        <div class="gift-grid">
+          <div class="gift-card" id="giftBoy">
+            <div class="gift-icon-wrap boy"><i class="fas fa-mars"></i></div>
+            <div class="gift-name">Si es niño</div>
+            <div class="gift-detail"><strong>Pañales</strong><br>Talla RN o 1</div>
+          </div>
+          <div class="gift-card" id="giftGirl">
+            <div class="gift-icon-wrap girl"><i class="fas fa-venus"></i></div>
+            <div class="gift-name">Si es niña</div>
+            <div class="gift-detail"><strong>Pañitos húmedos</strong><br>Sin alcohol · Hipoalergénicos</div>
           </div>
         </div>
-        <div class="divider" style="margin:0.5rem 0;"><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i></div>
-        <div class="section-title"><i class="fas fa-gift" style="color:var(--gold);margin-right:0.38rem;"></i>Sugerencias de regalo</div>
-        <p class="section-sub">Según el género que se revele, te invitamos a traer:</p>
-        <div class="gift-grid">
-          <div class="gift-card" id="giftBoy"><div class="gift-icon-wrap boy"><i class="fas fa-mars"></i></div><div class="gift-name">Si es niño</div><div class="gift-detail"><strong>Pañales</strong><br>Talla RN o 1</div></div>
-          <div class="gift-card" id="giftGirl"><div class="gift-icon-wrap girl"><i class="fas fa-venus"></i></div><div class="gift-name">Si es niña</div><div class="gift-detail"><strong>Pañitos húmedos</strong><br>Sin alcohol · Hipoalergénicos</div></div>
+
+        <div class="cash-note">
+          <i class="fas fa-coins"></i>
+          También aceptamos aporte en efectivo para la canastilla
         </div>
-        <div class="info-box" style="text-align:left;margin-top:0.4rem;"><div class="info-row" style="margin-bottom:0"><div class="info-icon"><i class="fas fa-question"></i></div><div><div class="info-label">¿No sabes qué traer?</div><div class="info-value">¡Ambas opciones son bienvenidas! El misterio se revela ese día.</div></div></div></div>
-        <div class="note" style="margin-top:0.55rem;"><i class="fas fa-coins" style="color:var(--gold)"></i>&nbsp; También aceptamos aporte en efectivo para la canastilla</div>
-        <div class="sign" style="font-size:clamp(1.2rem,3.8vw,1.6rem);margin-top:0.4rem;">¡Gracias por tu cariño!</div>
+
+        <div class="info-box" style="margin-top:0.4rem;">
+          <div class="info-row" style="margin-bottom:0">
+            <div class="info-icon"><i class="fas fa-question"></i></div>
+            <div><div class="info-label">¿No sabes qué traer?</div><div class="info-value">¡Ambas opciones son bienvenidas! El misterio se revela ese día.</div></div>
+          </div>
+        </div>
+
+        <div class="sign">¡Gracias por tu cariño!</div>
+
       </div>
     </div>
   </div>
-</div>
 
+  <!-- ══ SLIDE 2: CÓDIGO DE VESTIMENTA ══ -->
+  <div class="slide" data-index="2">
+    <div class="card">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+
+        <div class="eco-wrap">
+          <div class="eco-ring"></div>
+          <div class="eco-inner-ring"></div>
+          <img class="eco-img" src="https://raw.githubusercontent.com/josephom27/revelacion-de-genero/main/WhatsApp%Image%2026-05-01%at%6.09.43%PM.jpeg" alt="Papás"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="eco-placeholder" style="display:none;"><i class="fas fa-heartbeat"></i></div>
+          <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
+          <i class="fas fa-star eco-star"></i><i class="fas fa-star eco-star"></i>
+        </div>
+
+        <div class="divider"><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i><i class="fas fa-diamond"></i></div>
+
+        <div class="dress-hero">
+          <div>
+            <div class="dress-title"><i class="fas fa-tshirt" style="color:var(--gold);margin-right:0.3rem;"></i>Código de vestimenta</div>
+            <div class="dress-subtitle" style="margin-top:0.2rem;">¡Pon tu predicción en tu outfit!</div>
+          </div>
+
+          <div class="vs-row">
+            <div class="team-card girl">
+              <i class="fas fa-venus team-icon girl"></i>
+              <div class="team-label girl">¿Niña?</div>
+              <div class="team-desc">Lleva una prenda o accesorio<br><strong style="color:#b0607a">rosado</strong></div>
+            </div>
+            <div class="vs-badge">VS</div>
+            <div class="team-card boy">
+              <i class="fas fa-mars team-icon boy"></i>
+              <div class="team-label boy">¿Niño?</div>
+              <div class="team-desc">Lleva una prenda o accesorio<br><strong style="color:#4a80a8">azul</strong></div>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            <p><strong>💡 Tip:</strong> Puede ser solo un accesorio pequeño — una cintilla, una corbata, una banda, un moño... ¡Lo importante es tu apuesta! Suma emoción al misterio del gran momento.</p>
+          </div>
+
+          <div class="info-box" style="margin:0;">
+            <div class="info-row" style="margin-bottom:0">
+              <div class="info-icon"><i class="fas fa-star" style="color:var(--gold)"></i></div>
+              <div><div class="info-label">Recuerda</div><div class="info-value">Lo único esencial es tu presencia<br>y todo tu amor ❤️</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sign" style="margin-top:auto;padding-top:0.4rem;">¡Los esperamos!</div>
+
+      </div>
+    </div>
+  </div>
+
+</div><!-- /viewport -->
+
+<!-- Nav dots -->
 <nav class="nav-dots" id="navDots">
   <div class="dot active" data-target="0"></div>
   <div class="dot" data-target="1"></div>
+  <div class="dot" data-target="2"></div>
 </nav>
 
-<div class="scroll-hint" id="scrollHint"><i class="fas fa-chevron-down"></i> Desliza para ver regalos</div>
+<!-- Slide hint -->
+<div class="slide-label" id="slideLabel">
+  <i class="fas fa-chevron-down"></i> Desliza para continuar
+</div>
 
 <script>
   const slides  = document.querySelectorAll('.slide');
   const dots    = document.querySelectorAll('.dot');
-  const hint    = document.getElementById('scrollHint');
+  const hint    = document.getElementById('slideLabel');
   const total   = slides.length;
   let current   = 0;
   let animating = false;
@@ -515,23 +672,23 @@
   function goTo(next) {
     if (animating || next === current || next < 0 || next >= total) return;
     animating = true;
-    const prev   = current;
+    const prev = current;
     const goDown = next > prev;
 
-    slides[next].style.transition   = 'none';
-    slides[next].style.transform    = goDown ? 'translateY(100%)' : 'translateY(-100%)';
-    slides[next].style.opacity      = '0';
+    slides[next].style.transition = 'none';
+    slides[next].style.transform  = goDown ? 'translateY(100%)' : 'translateY(-100%)';
+    slides[next].style.opacity    = '0';
     slides[next].style.pointerEvents = 'none';
 
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      slides[next].style.transition   = '';
-      slides[next].style.transform    = 'translateY(0)';
-      slides[next].style.opacity      = '1';
+      slides[next].style.transition = '';
+      slides[next].style.transform  = 'translateY(0)';
+      slides[next].style.opacity    = '1';
       slides[next].style.pointerEvents = 'all';
       slides[next].classList.add('active');
 
-      slides[prev].style.transform   = goDown ? 'translateY(-100%)' : 'translateY(100%)';
-      slides[prev].style.opacity     = '0';
+      slides[prev].style.transform = goDown ? 'translateY(-100%)' : 'translateY(100%)';
+      slides[prev].style.opacity   = '0';
       slides[prev].style.pointerEvents = 'none';
       slides[prev].classList.remove('active');
 
@@ -542,6 +699,7 @@
     }));
   }
 
+  // Wheel
   let wt = null;
   window.addEventListener('wheel', e => {
     if (wt) return;
@@ -550,11 +708,13 @@
     wt = setTimeout(() => wt = null, 960);
   }, { passive: true });
 
+  // Keyboard
   window.addEventListener('keydown', e => {
     if (e.key === 'ArrowDown' || e.key === 'PageDown') goTo(current + 1);
     if (e.key === 'ArrowUp'   || e.key === 'PageUp')   goTo(current - 1);
   });
 
+  // Touch
   let ty = null;
   window.addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
   window.addEventListener('touchend',   e => {
@@ -564,15 +724,16 @@
     ty = null;
   }, { passive: true });
 
+  // Dots
   dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.target)));
 
-  // Confirmar asistencia por WhatsApp
+  // Confirmar asistencia
   document.getElementById('confirmBtn').addEventListener('click', () => {
-    const msg = encodeURIComponent('¡Hola! Confirmo mi asistencia al Gender Reveal de Joseph & Cely el 09 de Mayo 2026. ¡Ahí estaré!');
+    const msg = encodeURIComponent('¡Hola! Confirmo mi asistencia al Gender Reveal de Joseph & Cely el 16 de Mayo 2026. ¡Ahí estaré!');
     window.open('https://wa.me/51955055272?text=' + msg, '_blank');
   });
 
-  // Lógica de regalos
+  // Regalos
   const boyCard  = document.getElementById('giftBoy');
   const girlCard = document.getElementById('giftGirl');
   boyCard.addEventListener('click', () => {
